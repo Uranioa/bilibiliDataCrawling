@@ -22,7 +22,7 @@
 - Python 3.7 及以上
 - pip
 - openpyxl
-- nuitka
+- pyinstaller
 
 ### 安装依赖
 
@@ -35,7 +35,7 @@ pip install -r requirements.txt
 如无 `requirements.txt`，可手动安装主要依赖：
 
 ```bash
-pip install openpyxl nuitka
+pip install openpyxl pyinstaller
 ```
 
 ## 使用说明
@@ -50,21 +50,17 @@ python main.py
 
 ### 打包为 Windows 可执行文件
 
-本项目推荐使用 Nuitka 进行打包，命令如下：
+本项目推荐使用 PyInstaller 进行打包，命令如下：
 
 ```bash
-nuitka --standalone --windows-icon-from-ico=Resources/app.ico --output-filename=bilibiliDataCrawling.exe --msvc=latest main.py
+pyinstaller --icon=Resources/app.ico --contents-director libs --name bilibiliDataCrawling main.py
 ```
 
 **参数说明：**
 
-- `--standalone`：生成独立文件夹，包含所有依赖
-- `--windows-icon-from-ico=Resources/app.ico`：指定 exe 图标
-- `--output-filename=bilibiliDataCrawling.exe`：指定输出文件名
-- `--msvc=latest`：使用最新版本的 Visual Studio C++ 编译器
-
-> **注意：**  
-> 需提前安装 Visual Studio C++ 工具集，或根据 Nuitka 提示配置编译环境。
+- `--icon=Resources/app.ico`：指定 exe 图标
+- `--contents-director libs`：指定生成的依赖文件夹名称
+- `--name bilibiliDataCrawling`：指定输出文件名
 
 ## 功能简介
 
@@ -72,14 +68,6 @@ nuitka --standalone --windows-icon-from-ico=Resources/app.ico --output-filename=
 - 支持将数据写入 Excel 文件，保留原有内容
 - 模块化设计，便于扩展
 - 可打包为 Windows 独立应用
-
-## 常见问题
-
-1. **打包报错缺少编译环境**  
-   请确保已安装 Visual Studio C++ 工具集，并在“x64 Native Tools Command Prompt for VS”中执行打包命令。
-
-2. **Excel 数据未保存或被覆盖**  
-   请确保写入 Excel 时采用追加或覆盖指定单元格的方式，避免整体覆盖。
 
 ## 联系方式
 
